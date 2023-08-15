@@ -1,0 +1,223 @@
+name: 'Text to Emoji Action'
+description: 'Sets output variables for an emoji based on input'
+inputs:
+  color:
+    description: 'The color to return an emoji for'
+    required: false
+  food:
+    description: 'The food to return an emoji for'
+    required: false
+  animal:
+    description: 'The animal to return an emoji for'
+    required: false
+outputs:
+  color-emoji:
+    description: "The color emoji"
+    value: ${{ steps.color-emoji-generator.outputs.color-emoji }}
+  food-emoji:
+    description: "The food emoji"
+    value: ${{ steps.food-emoji-generator.outputs.food-emoji }}
+  animal-emoji:
+    description: "The animal emoji"
+    value: ${{ steps.food-emoji-generator.outputs.animal-emoji }}
+runs:
+  using: "composite"
+  steps:
+    - id: color-emoji-generator
+      if: ${{ inputs.color != '' }}
+      shell: bash
+      run: |
+        echo "processing color emoji..."
+        echo "::debug::You entered ${{ inputs.color }}."
+        
+        case ${{ inputs.color }} in
+          red) color=🌹 ;;
+          orange) color=🎃 ;;
+          yellow) color=🚖 ;;
+          green) color=⛳️ ;;
+          blue) color=👖 ;;
+          indigo) color=🪁 ;;
+          violet) color=🪻 ;;
+          *)
+            echo "You entered another color, ${{ inputs.color }}, so you get this emoji." 
+            color=🎨 ;;
+        esac
+        
+        echo "color-emoji=$(echo $color)" >> $GITHUB_OUTPUT
+        
+    - id: food-emoji-generator
+      if: ${{ inputs.food != '' }}
+      shell: bash
+      run: |
+        echo "processing food emoji..."
+        echo "::debug::You entered ${{ inputs.food }}."
+        
+        case "${{ inputs.food }}" in
+
+          "apple") food=🍎 ;;
+          "avocado") food=🥑 ;;
+          "bacon") food=🥓 ;;
+          "bagel") food=🥯 ;;
+          "banana") food=🍌 ;;
+          "beer") food=🍺 ;;
+          "bell pepper") food=🫑 ;;
+          "birthday cake") food=🎂 ;;
+          "blueberry") food=🫐 ;;
+          "bread") food=🍞 ;;
+          "broccoli") food=🥦 ;;
+          "burger") food=🍔 ;;
+          "burrito") food=🌯 ;;
+          "butter") food=🧈 ;;
+          "cake") food=🍰 ;;
+          "candy") food=🍬 ;;
+          "carrot") food=🥕 ;;
+          "cheese") food=🧀 ;;
+          "cherry") food=🍒 ;;
+          "chicken") food=🍗 ;;
+          "chili pepper") food=🌶 ;;
+          "chocolate") food=🍫 ;;
+          "cocktail") food=🍸 ;;
+          "coconut") food=🥥 ;;
+          "coffee") food=☕️ ;;
+          "cookie") food=🍪 ;;
+          "corn") food=🌽 ;;
+          "croissant") food=🥐 ;;
+          "cucumber") food=🥒 ;;
+          "cupcake") food=🧁 ;;
+          "curry") food=🍛 ;;
+          "custard") food=🍮 ;;
+          "donut") food=🍩 ;;
+          "egg") food=🍳 ;;
+          "eggplant") food=🍆 ;;
+          "fish") food=🍣 ;;
+          "fries") food=🍟 ;;
+          "garlic") food=🧄 ;;
+          "grape") food=🍇 ;;
+          "grapes") food=🍇 ;;
+          "honey") food=🍯 ;;
+          "hot dog") food=🌭 ;;
+          "ice cream")   food=🍦 ;;
+          "kiwi") food=🥝 ;;
+          "lemon") food=🍋 ;;
+          "lettuce") food=🥬 ;;
+          "lobster") food=🦞 ;;
+          "lollipop") food=🍭 ;;
+          "mango") food=🥭 ;;
+          "milk") food=🥛 ;;
+          "mooncake") food=🥮 ;;
+          "mushroom") food=🍄 ;;
+          "olive") food=🫒 ;;
+          "onion") food=🧅 ;;
+          "oyster") food=🦪 ;;
+          "pad thai") food=🍜 ;;
+          "pancakes") food=🥞 ;;
+          "peach") food=🍑 ;;
+          "peanut") food=🥜 ;;
+          "pear") food=🍐 ;;
+          "pie") food=🥧 ;;
+          "pineapple") food=🍍 ;;
+          "pita") food=🥙 ;;
+          "pizza") food=🍕 ;;
+          "popcorn") food=🍿 ;;
+          "potato") food=🥔 ;;
+          "pretzel") food=🥨 ;;
+          "ramen") food=🍜 ;;
+          "salad") food=🥗 ;;
+          "sandwich") food=🥪 ;;
+          "shaved ice") food=🍧 ;;
+          "shrimp") food=🍤 ;;
+          "soda") food=🥤 ;;
+          "soup") food=🍲 ;;
+          "steak") food=🥩 ;;
+          "strawberry") food=🍓 ;;
+          "sundae") food=🍨 ;;
+          "sushi") food=🍣 ;;
+          "taco") food=🌮 ;;
+          "tea") food=🍵 ;;
+          "tomato") food=🍅 ;;
+          "waffle") food=🧇 ;;
+          "watermelon") food=🍉 ;;
+          "wine") food=🍷 ;;
+          "wonton") food=🥟 ;;
+          *)
+            echo "You entered another food, ${{ inputs.food }}, so you get this emoji."
+            food=🍽️ ;;
+        esac
+        
+        echo "food-emoji=$(echo $food)" >> $GITHUB_OUTPUT
+
+    - id: animal-emoji-generator
+      if: ${{ inputs.animal != '' }}
+      shell: bash
+      run: |
+        echo "processing animal emoji..."
+        echo "::debug::You entered ${{ inputs.animal }}."
+        
+        case ${{ inputs.animal }} in
+
+          alligator) animal=🐊 ;;
+          alpaca) animal=🦙 ;;
+          badger) animal=🦡 ;;
+          bat) animal=🦇 ;;
+          bear) animal=🐻 ;;
+          bird) animal=🦜 ;;
+          bison) animal=🦬 ;;
+          boar) animal=🐗 ;;
+          camel) animal=🐫 ;;
+          cat) animal=🐱 ;;
+          chicken) animal=🐔 ;;
+          chipmunk) animal=🐿️ ;;
+          cow) animal=🐮 ;;
+          crab) animal=🦀 ;;
+          crocodile) animal=🐊 ;;
+          deer) animal=🦌 ;;
+          dinosaur) animal=🦖 ;;
+          dog) animal=🐶 ;;
+          dolphin) animal=🐬 ;;
+          donkey) animal=🫏 ;;
+          dragon) animal=🐉 ;;
+          duck) animal=🦆 ;;
+          eagle) animal=🦅 ;;
+          elephant) animal=🐘 ;;
+          fish) animal=🐟 ;;
+          fox) animal=🦊 ;;
+          frog) animal=🐸 ;;
+          giraffe) animal=🦒 ;;
+          goat) animal=🐐 ;;
+          gorilla) animal=🦍 ;;
+          hedgehog) animal=🦔 ;;
+          hippo) animal=🦛 ;;
+          horse) animal=🐴 ;;
+          koala) animal=🐨 ;;
+          lion) animal=🦁 ;;
+          lizard) animal=🦎 ;;
+          llama) animal=🦙 ;;
+          lobster) animal=🦞 ;;
+          monkey) animal=🐵 ;;
+          moose) animal=🫎 ;;
+          mouse) animal=🐭 ;;
+          octopus) animal=🐙 ;;
+          owl) animal=🦉 ;;
+          panda) animal=🐼 ;;
+          penguin) animal=🐧 ;;
+          pig) animal=🐷 ;;
+          raccoon) animal=🦝 ;;
+          ram) animal=🐑 ;;
+          rhino) animal=🦏 ;;
+          sheep) animal=🐑 ;;
+          shrimp) animal=🦐 ;;
+          snail) animal=🐌 ;;
+          snake) animal=🐍 ;;
+          squid) animal=🦑 ;;
+          squirrel) animal=🐿️ ;;
+          tiger) animal=🐯 ;;
+          turtle) animal=🐢 ;;
+          unicorn) animal=🦄 ;;
+          whale) animal=🐳 ;;
+          zebra) animal=🦓 ;;
+          *) 
+            echo "You entered another animal, ${{ inputs.animal }}, so you get this emoji."
+            animal=🎨 ;;
+        esac
+        
+        echo "animal-emoji=$(echo $animal)" >> $GITHUB_OUTPUT
