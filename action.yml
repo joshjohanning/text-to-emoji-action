@@ -1,5 +1,9 @@
-name: 'Text to Emoji Action'
-description: 'Sets output variables for an emoji based on input'
+name: 'Text to Emoji'
+author: '@joshjohanning'
+branding:
+  icon: 'image'
+  color: 'blue'
+description: 'Returns an emoji as an output variable based on text input'
 inputs:
   color:
     description: 'The color to return an emoji for'
