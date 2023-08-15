@@ -14,9 +14,16 @@ A simple GitHub Composite Action that takes an input (like food, color, animal) 
         animal: ${{ inputs.animal }}
     - name: write emoji
       run: |
+        # write emoji to console
         echo "color emoji: ${{ steps.get-emoji.outputs.color-emoji }}"
         echo "food emoji: ${{ steps.get-emoji.outputs.food-emoji }}"
         echo "animal emoji: ${{ steps.get-emoji.outputs.animal-emoji }}"
+
+        # write emoji to job summary
+        echo "${{ steps.get-emoji.outputs.color-emoji }} \
+          ${{ steps.get-emoji.outputs.food-emoji }} \
+          ${{ steps.get-emoji.outputs.animal-emoji }}" \
+          >> $GITHUB_STEP_SUMMARY
 ```
 
 ## Inputs
