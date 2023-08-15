@@ -19,7 +19,7 @@ outputs:
     value: ${{ steps.food-emoji-generator.outputs.food-emoji }}
   animal-emoji:
     description: "The animal emoji"
-    value: ${{ steps.food-emoji-generator.outputs.animal-emoji }}
+    value: ${{ steps.animal-emoji-generator.outputs.animal-emoji }}
 runs:
   using: "composite"
   steps:
