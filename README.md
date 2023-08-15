@@ -34,7 +34,11 @@ Currently supports:
  - `color` *(rainbow colors only)*
  - `food` 
 
-*Each input is optional*
+> **Important**
+> Use the _singular_ form of the word for simplicity, e.g.: `fry` instead of `fries`, `grape` instead of `grapes`, etc.
+
+> **Note**
+> Each input is optional
 
 ## Outputs
 
